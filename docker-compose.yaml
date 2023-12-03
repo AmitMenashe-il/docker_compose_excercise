@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  Nginx:
+    image: amitmenashe/whist_nginx
+    build: ./nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    
+    ports:
+      - "80:80"
+    depends_on:
+      - WhistApp
+  WhistApp:
+    image: amitmenashe/whist_app
+    build: ./app
+    env_file:
+     - ./mysql/db.env
+    volumes:
+      - applogs:/app/log
+      - ./app/app.py/:/WhistApp/app.py
+      
+    expose:
+     - "80"
+    deploy:
+      replicas: 3
+    depends_on:
+      - DB
+
+  DB:
+    image: amitmenashe/whist_mysql:latest
+    build: ./mysql
+    env_file:
+      - ./mysql/db.env
+    volumes:
+      - ./mysql/init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
+      - sqldata:/var/lib/mysql
+      - sqllogs:/var/log/mysql
+    expose:
+     - "3306"
+
+volumes:
+ applogs:
+ sqldata:
+ sqllogs:

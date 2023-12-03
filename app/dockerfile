@@ -1,0 +1,6 @@
+FROM  python:latest
+
+WORKDIR /WhistApp
+COPY requirements.txt /WhistApp/requirements.txt
+RUN pip install -r requirements.txt
+CMD python app.py
