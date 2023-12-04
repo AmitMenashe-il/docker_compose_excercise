@@ -37,7 +37,7 @@ def addCountCreateCookieData2DBBandShowIP():
     internal_ip_address = socket.gethostbyname(socket.gethostname())
 
     # create cookie
-    cookie=make_response()
+    cookie=make_response(internal_ip_address)
     cookie_timer = datetime.datetime.now() + datetime.timedelta(minutes=5)
     cookie.set_cookie('whist_app_cookie',value=internal_ip_address,expires=cookie_timer)
 
@@ -55,7 +55,7 @@ def addCountCreateCookieData2DBBandShowIP():
     session.commit()
     session.close()
 
-    return internal_ip_address
+    return cookie
 
 
 @app.route('/showcount', methods=['GET', 'POST'])
