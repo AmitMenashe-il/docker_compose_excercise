@@ -39,7 +39,7 @@ def addCountCreateCookieData2DBBandShowIP():
     # create cookie
     cookie=make_response(internal_ip_address)
     cookie_timer = datetime.datetime.now() + datetime.timedelta(minutes=5)
-    cookie.set_cookie('whist_app_cookie',value=internal_ip_address,expires=cookie_timer)
+    cookie.set_cookie('whist_app_cookie',value=internal_ip_address+':80',expires=cookie_timer)
 
     # add 1 to counter
     counter = session.query(count_table_object).one_or_none()
