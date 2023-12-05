@@ -37,6 +37,7 @@ jobs:
           for i in {1..10}; do
             curl -c cookie.txt http://localhost/  # Store the cookie in a file
             curl -b cookie.txt http://localhost/  # Use the stored cookie in subsequent requests
+            cat cookie.txt
             sleep 1  # Adjust wait time between requests
           done
           cat cookie.txt
