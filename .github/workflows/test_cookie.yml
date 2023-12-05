@@ -40,6 +40,12 @@ jobs:
             sleep 1  # Adjust wait time between requests
           done
 
+      - name: Upload cookie.txt as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: tests/cookie.txt
+
       # Finally, tear down the containers after testing
       - name: Stop and remove containers
         run: docker-compose down
