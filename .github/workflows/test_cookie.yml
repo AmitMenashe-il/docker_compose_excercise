@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: cookie.txt
+          path: ./cookie.txt
 
       # Finally, tear down the containers after testing
       - name: Stop and remove containers
