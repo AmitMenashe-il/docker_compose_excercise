@@ -25,7 +25,7 @@ jobs:
           docker-compose up -d --build
 
       - name: Wait for containers to start
-        run: sleep 60  # Adjust this wait time based on your app startup time
+        run: sleep 30  # Adjust this wait time based on your app startup time
 
       # Add further steps for testing your application here.
       # This can include running tests, making API requests, etc.
@@ -39,12 +39,13 @@ jobs:
             curl -b cookie.txt http://localhost/  # Use the stored cookie in subsequent requests
             sleep 1  # Adjust wait time between requests
           done
+          cat cookie.txt
 
       - name: Upload cookie.txt as artifact
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: tests/cookie.txt
+          path: cookie.txt
 
       # Finally, tear down the containers after testing
       - name: Stop and remove containers
