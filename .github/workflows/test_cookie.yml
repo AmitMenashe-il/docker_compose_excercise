@@ -1,0 +1,48 @@
+name: Docker Compose Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:latest
+        options: --privileged
+        ports:
+          - 80:80
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and run Docker Compose
+        run: |
+          docker-compose up -d --build
+
+      - name: Wait for containers to start
+        run: sleep 60  # Adjust this wait time based on your app startup time
+
+      # Add further steps for testing your application here.
+      # This can include running tests, making API requests, etc.
+
+      # For example, if your application has tests, you might run them like this:
+      - name: Run tests
+        run: |
+          # Run tests against your application
+          for i in {1..10}; do
+            curl -c cookie.txt http://localhost/  # Store the cookie in a file
+            curl -b cookie.txt http://localhost/  # Use the stored cookie in subsequent requests
+            sleep 1  # Adjust wait time between requests
+          done
+
+      # Finally, tear down the containers after testing
+      - name: Stop and remove containers
+        run: docker-compose down
