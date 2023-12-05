@@ -9,10 +9,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: docker:latest
-        options: --privileged
+    #services:
+      #docker:
+        #image: docker:latest
+        #options: --privileged
         #ports:
           #- 8080:80
 
