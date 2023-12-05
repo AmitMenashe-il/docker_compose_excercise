@@ -35,9 +35,9 @@ jobs:
         run: |
           # Run tests against your application
           echo 'port 80'
-          curl -c cookie.txt http://localhost # put cookie in file
+          curl -c cookie.txt http://Nginx # put cookie in file
           echo 'port 8080'
-          curl -c cookie.txt http://localhost:8080 # put cookie in file
+          curl -c cookie.txt http://Nginx:8080 # put cookie in file
           for i in {1..10}; do
             curl -b cookie.txt http://localhost:8080 # use cookie from file
             sleep 1  # Adjust wait time between requests
