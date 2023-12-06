@@ -9,12 +9,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: docker:latest
-        options: --privileged
-        ports:
-          - 8080:8080
+   # services:
+   #   docker:
+   #     image: docker:latest
+   #     options: --privileged
+   #     ports:
+   #       - 8080:8080
 
     steps:
       - name: Checkout code
