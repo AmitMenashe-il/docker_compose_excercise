@@ -14,7 +14,7 @@ jobs:
         image: docker:latest
         options: --privileged
         ports:
-          - 8080:80
+          - 8080:8080
 
     steps:
       - name: Checkout code
